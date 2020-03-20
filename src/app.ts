@@ -1,59 +1,119 @@
-class Departement {
-    name : string;
-      id : string;
-   public employees:string[]=[];
-    constructor(n: string,   readonly is :string="habib") {
-    this.name = n;
-        this.is="q";
-        this.id = is;
+abstract class Department {
+    static fiscalYear = 2020;
+    // private readonly id: string;
+    // private name: string;
+    protected employees: string[] = [];
+
+    constructor(protected readonly id: string, public name: string) {
+        // this.id = id;
+        // this.name = n;
+        // console.log(Department.fiscalYear);
     }
 
-    describe(this: Departement){
-      console.log('Department: ' +`${this.id} `);
+    static createEmployee(name: string) {
+        return {name: name};
     }
-    addEmployee(employee:string){
-         this.employees.push(employee);
+
+    abstract describe(this: Department): void;
+
+    addEmployee(employee: string) {
+        // validation etc
+        // this.id = 'd2';
+        this.employees.push(employee);
     }
-    printEmployeeInformation(){
+
+    printEmployeeInformation() {
         console.log(this.employees.length);
         console.log(this.employees);
     }
 }
 
-class ITDepartement extends Departement{
-    public  userAdmin:string[]=[];
- constructor(id: string, public admins: string[]) {
-     super(id,'IT');
-     this.userAdmin= admins;
+class ITDepartment extends Department {
+    admins: string[];
 
- }
-   addAdminEmpolyee(){
-       this.employees.push(`${this.userAdmin} `);
+    constructor(id: string, admins: string[]) {
+        super(id, 'IT');
+        this.admins = admins;
     }
-    printAmdinEmpolyee(){
-     if(this.employees){
-         return this.employees;
-     }
-    throw new Error('No report found.');
 
-    }
-    setEmpolyee(adminUsers: string [] ){
-    this.employees.push(...adminUsers);
+    describe() {
+        console.log('IT Department - ID: ' + this.id);
     }
 }
-const accounting = new Departement('Accounting');
-const itdDepartement = new ITDepartement('Id',['admin','user']);
-itdDepartement. addAdminEmpolyee();
-itdDepartement. setEmpolyee(['salma']);
-console.log(itdDepartement. printAmdinEmpolyee());
-// accounting.describe();
-// accounting.addEmployee("Bellaaj");
-// accounting.addEmployee("Mohamed");
-// accounting.addEmployee("Habib");
-// accounting.employees[0]="Anna";
-// accounting.printEmployeeInformation();
 
 
+class AccountingDepartment extends Department {
+    private static instance: AccountingDepartment;
+    private lastReport: string;
 
-// const accountingCopy = { name : "habib" , describe : accounting.describe}
-// accountingCopy.describe();
+    private constructor(protected  id: string, private reports: string[]) {
+        super(id, 'Accounting');
+        this.lastReport = reports[0];
+    }
+
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error('No report found.');
+    }
+
+    set mostRecentReport(value: string) {
+        if (!value) {
+            throw new Error('Please pass in a valid value!');
+        }
+        this.addReport(value);
+    }
+
+    static getInstance() {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+
+        this.instance = new AccountingDepartment('habib B22', []);
+        return this.instance;
+    }
+
+    describe() {
+        console.log('Accounting Department - ID: ' + this.id);
+    }
+
+    addEmployee(name: string) {
+        if (name === 'Max') {
+            return;
+        }
+        this.employees.push(name);
+    }
+
+    addReport(text: string) {
+        this.reports.push(text);
+        this.lastReport = text;
+    }
+
+    printEmployees() {
+        console.log(this.employees);
+    }
+
+    printReports() {
+        console.log(this.reports);
+    }
+
+    printReportsLast() {
+        console.log(this.lastReport);
+    }
+}
+
+
+const accounting = AccountingDepartment.getInstance();
+console.log(accounting);
+// const idDepartement = new ITDepartment('B22 -ID',[]);
+// idDepartement.describe();
+// accounting.addEmployee('Habib');
+// accounting.addEmployee('Bellaaj');
+// accounting.printEmployees();
+// accounting.addReport('ha');
+// accounting.addReport('hb');
+// accounting.addReport('hs');
+// accounting.printReports();
+// accounting.printReportsLast();
+
