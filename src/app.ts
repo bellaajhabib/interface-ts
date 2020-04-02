@@ -1,72 +1,39 @@
-type Admin = {
-    name: string;
-    privileges: string[];
-
-};
-
-type Employee = {
-    name: string;
-    startDate: Date;
-};
-
-type ElevatedEmployee = Admin & Employee;
-
-const e1: ElevatedEmployee = {
-    name: 'Max',
-    privileges: ['create-server'],
-    startDate: new Date()
+interface Bird {
+    type: 'bird';
+    flyingSpeed: number;
 }
 
-type Combinable = string | number;
-type Numeric = number | boolean;
-type Universal = Combinable & Numeric;
-function add (a:Combinable, b: Combinable){
-  if(typeof a === 'string' || typeof b ==='string') {
-      return a.toString() + b.toString();
-  }
- return  a+ b;
+interface Horse {
+    type: 'horse'
+    runningSpeed: number;
 }
-type UnknownEmployee = Employee & Admin;// type UnknownEmployee = Employee | Admin;
-function printEmployeeInformation(emp:UnknownEmployee) {
 
-    if ('privileges' in emp){
-        console.log('Privileges ' + emp.privileges);
+type  Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+    let speed;
+
+    switch (animal.type) {
+        case 'bird':
+            speed = animal.flyingSpeed;
+            break;
+        case 'horse':
+            speed = animal.runningSpeed;
+            break;
+
     }
-    console.log(emp);
-    return emp;
-
-}
-// printEmployeeInformation({name:'habib',startDate : new Date() ,privileges : ['Admin','User']});
-// const results = add('r','d');
-//console.log(results);
-
-
-class Car {
-    drive() {
-        console.log('Driving...');
-    }
+    console.log(speed);
 }
 
-class Truck {
-    drive() {
-        console.log('Driving a truck...');
-    }
+moveAnimal({type: 'bird', flyingSpeed: 20});
 
-    loadCargo(amount: number) {
-        console.log('Loading cargo ...' + amount);
-    }
+const paragraph = document.querySelector('p');
+const paragraphID = document.getElementById('message-output');
+
+console.log(paragraphID);
+
+interface ErrorContainer {
+    email: 'Not avalid email',
+    usernale: 'Must start with a charactet!'
 }
 
-type Vehicle = Car | Truck;
-
-const v1 = new Car();
-const v2 = new Truck();
-
-function useVehicle(vehicle: Vehicle) {
-    vehicle.drive();
-    if (vehicle instanceof Truck) {
-        vehicle.loadCargo(1000);
-    }
-}
- useVehicle(v1);
-useVehicle(v2);
