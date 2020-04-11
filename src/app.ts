@@ -1,126 +1,37 @@
-type Admin = {
-    name: string;
-    privileges: string[];
-};
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+    let objA1 = objA;
+    let objB1 = objB;
+    const returnedTarget = Object.assign(objA1, objB1);
 
-type Employee = {
-    name: string;
-    startDate: Date;
-};
-
-// interface ElevatedEmployee extends Employee, Admin {}
-
-type ElevatedEmployee = Admin & Employee;
-
-const e1: ElevatedEmployee = {
-    name: 'Max',
-    privileges: ['create-server'],
-    startDate: new Date()
-};
-
-type Combinable = string | number| boolean;
-type Numeric = number | boolean;
-
-type Universal = Combinable & Numeric;
-
-function add(a: number, b: number): string;
-function add(a: string, b: string): string;
-function add(a: string, b: number): string;
-function add(a: number, b: string): string;
-function add(a: boolean, b: string): string ;
-function add(a: Combinable, b: Combinable) {
-    if (typeof a === 'string' || typeof b === 'string') {
-        return a.toString() + b.toString()+' -';
-    }
-    return a.toString() + b;
+    return returnedTarget;
 }
 
-const result = add(true, ' Bellaaj');
-result.split(' ');
-console.log(result);
-// type UnknownEmployee = Employee | Admin;
+const mergedObject = merge({name: 'Habib', hobbies: ['Eat']}, {age: 36});
 
-// function printEmployeeInformation(emp: UnknownEmployee) {
-//   console.log('Name: ' + emp.name);
-//   if ('privileges' in emp) {
-//     console.log('Privileges: ' + emp.privileges);
-//   }
-//   if ('startDate' in emp) {
-//     console.log('Start Date: ' + emp.startDate);
-//   }
-// }
+interface lengthy {
+    length: number;
+    push: any;
 
-// printEmployeeInformation({ name: 'Manu', startDate: new Date() });
+    toLocaleString(): string;
 
-// class Car {
-//   drive() {
-//     console.log('Driving...');
-//   }
-// }
 
-// class Truck {
-//   drive() {
-//     console.log('Driving a truck...');
-//   }
+}
 
-//   loadCargo(amount: number) {
-//     console.log('Loading cargo ...' + amount);
-//   }
-// }
+function countAndDescribe<T extends lengthy>(element: T): [number, T] {
+    console.log(element.toLocaleString());
+    element.push("e");
 
-// type Vehicle = Car | Truck;
+    return [element.length, element];
+}
 
-// const v1 = new Car();
-// const v2 = new Truck();
+//console.log(countAndDescribe(['My dream is to fly !','What about me !']));
+//countAndDescribe('My dream is to fly !');
 
-// function useVehicle(vehicle: Vehicle) {
-//   vehicle.drive();
-//   if (vehicle instanceof Truck) {
-//     vehicle.loadCargo(1000);
-//   }
-// }
+function extractAndConvert<T extends object, U extends keyof T>(
+    obj: T,
+    key: U
+) {
+    return 'Value' + obj[key];
+}
 
-// useVehicle(v1);
-// useVehicle(v2);
-
-// interface Bird {
-//   type: 'bird';
-//   flyingSpeed: number;
-// }
-
-// interface Horse {
-//   type: 'horse';
-//   runningSpeed: number;
-// }
-
-// type Animal = Bird | Horse;
-
-// function moveAnimal(animal: Animal) {
-//   let speed;
-//   switch (animal.type) {
-//     case 'bird':
-//       speed = animal.flyingSpeed;
-//       break;
-//     case 'horse':
-//       speed = animal.runningSpeed;
-//   }
-//   console.log('Moving at speed: ' + speed);
-// }
-
-// moveAnimal({type: 'bird', flyingSpeed: 10});
-
-// // const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
-// const userInputElement = document.getElementById('user-input');
-
-// if (userInputElement) {
-//   (userInputElement as HTMLInputElement).value = 'Hi there!';
-// }
-
-// interface ErrorContainer { // { email: 'Not a valid email', username: 'Must start with a character!' }
-//   [prop: string]: string;
-// }
-
-// const errorBag: ErrorContainer = {
-//   email: 'Not a valid email!',
-//   username: 'Must start with a capital character!'
-// };
+console.log(extractAndConvert({name: 'Habib', job: 'AC'}, 'job'));

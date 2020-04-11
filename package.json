@@ -27,5 +27,8 @@
     "type": "git",
     "url": "https://github.com/bellaajhabib/interface-ts",
     "private": true
+  },
+  "dependencies": {
+    "core-js": "^3.6.4"
   }
 }
