@@ -1,45 +1,40 @@
 "use strict";
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function extractAndConvert(obj, key) {
-    return 'Value' + obj[key];
-}
-console.log(extractAndConvert({ name: 'Habib', job: 'AC' }, 'job'));
-function createCourseGoal(title, description, date) {
-    var courseGoal = {};
-    courseGoal.title = title;
-    courseGoal.description = description;
-    courseGoal.completeUntil = date;
-    return courseGoal;
-}
-var course = createCourseGoal('habib', 'this my describe', new Date());
-var courseGoal = {};
-var names = ["Max", "Anna"];
-var DataStorage = (function () {
-    function DataStorage() {
-        this.data = [];
-    }
-    DataStorage.prototype.addItem = function (item) {
-        this.data.push(item);
-    };
-    DataStorage.prototype.removeItem = function (item) {
-        if (this.data.indexOf(item) === -1) {
-            return;
+function WithTemplate(template, hookId) {
+    console.log("template Factory");
+    return function (constructor) {
+        var hookEl = document.getElementById(hookId);
+        var p = new constructor();
+        if (hookEl) {
+            hookEl.innerHTML = template;
+            hookEl.querySelector('h1').textContent += " " + p.name;
         }
-        this.data.splice(this.data.indexOf(item), 1);
     };
-    DataStorage.prototype.getItems = function () {
-        return __spreadArrays(this.data);
+}
+function Logger(logString) {
+    console.log("Logger Factory");
+    return function (getName) {
+        logString;
+        getName;
     };
-    return DataStorage;
+}
+var Person = (function () {
+    function Person() {
+        this.name = 'Max';
+        console.log(Logger instanceof Object);
+    }
+    Person.prototype.getName = function () {
+        return name;
+    };
+    Person = __decorate([
+        WithTemplate('<h1>My Person Object</h1>', 'app'),
+        Logger('LOGGING - PERSON')
+    ], Person);
+    return Person;
 }());
-var textStorage = new DataStorage();
-textStorage.addItem('Max');
-textStorage.addItem('Manu');
-console.log(textStorage.getItems());
 //# sourceMappingURL=app.js.map

@@ -1,58 +1,36 @@
-function extractAndConvert<T extends object, U extends keyof T>(
-    obj: T,
-    key: U
-) {
-    return 'Value' + obj[key];
-}
 
-console.log(extractAndConvert({name: 'Habib', job: 'AC'}, 'job'));
+function WithTemplate(template: string, hookId: string) {
+    console.log("template Factory")
+    return function (constructor: any) {
+        const hookEl = document.getElementById(hookId);
+        const p = new constructor();
 
-interface CourseGoal {
-    title: string;
-    description: string;
-    completeUntil: Date;
-
-}
-
-function createCourseGoal(
-    title: string,
-    description: string,
-    date: Date): CourseGoal {
-    let courseGoal: Partial<CourseGoal> = {}
-    courseGoal.title = title;
-    courseGoal.description = description;
-    courseGoal.completeUntil = date;
-
-    return courseGoal as CourseGoal;
-}
-
-let course = createCourseGoal('habib', 'this my describe', new Date());
-let courseGoal: Partial<CourseGoal> = {}
-const names: Readonly<string[]> = ["Max", "Anna"];
-
-
-class DataStorage<T extends string | number | boolean> {
-    private data: T[] = [];
-
-    addItem(item: T) {
-        this.data.push(item);
-    }
-
-    removeItem(item: T) {
-        if (this.data.indexOf(item) === -1) {
-            return;
+        if (hookEl) {
+            hookEl.innerHTML = template;
+            hookEl.querySelector('h1')!.textContent += " " + p.name;
         }
-        this.data.splice(this.data.indexOf(item), 1); // -1
-    }
-
-    getItems() {
-        return [...this.data];
     }
 }
 
-const textStorage = new DataStorage<string>();
-textStorage.addItem('Max');
-textStorage.addItem('Manu');
-//textStorage.removeItem('Max');
-console.log(textStorage.getItems());
+function Logger(logString: string) {
+    console.log("Logger Factory")
+    return function (getName: Function) {
+        logString;
+        getName;
+    }
+}
 
+@WithTemplate('<h1>My Person Object</h1>', 'app')
+
+@Logger('LOGGING - PERSON')
+class Person {
+    name = 'Max';
+
+    constructor() {
+        console.log(Logger instanceof Object);
+    }
+
+    getName() {
+        return name;
+    }
+}
