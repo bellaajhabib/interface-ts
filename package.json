@@ -1,35 +1,25 @@
 {
   "name": "understanding-typescript",
-  "version": "1.0.1",
-  "private": true,
+  "version": "1.0.0",
   "description": "Understanding TypeScript Course Setup",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "lite": "lite-server",
-    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" "
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "keywords": [
     "typescript",
     "course"
   ],
-  "author": "habib",
+  "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^5.1.0",
     "lite-server": "^2.5.4",
-    "ts-node": "^8.10.2",
-    "tsc-watch": "^4.2.3",
-    "typescript": "^3.9.5"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bellaajhabib/interface-ts",
-    "private": true
-  },
-  "dependencies": {
-    "core-js": "^3.6.4"
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.9.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
