@@ -1,0 +1,87 @@
+Index: index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\" />\n    <title>ProjectManager</title>\n    <link rel=\"stylesheet\" href=\"app.css\" />\n    <script src=\"dist/app.js\" defer></script>\n  </head>\n  <body>\n    <template id=\"project-input\">\n      <form>\n        <div class=\"form-control\">\n          <label for=\"title\">Title</label>\n          <input type=\"text\" id=\"title\" />\n        </div>\n        <div class=\"form-control\">\n          <label for=\"description\">Description</label>\n          <textarea id=\"description\" rows=\"3\"></textarea>\n        </div>\n        <div class=\"form-control\">\n          <label for=\"people\">People</label>\n          <input type=\"number\" id=\"people\" step=\"1\" min=\"0\" max=\"10\" />\n        </div>\n        <div class=\"form-control\">\n          <label for=\"habib\">Habib</label>\n          <input type=\"number\" id=\"habib\" step=\"1\" min=\"0\" max=\"10\" />\n        </div>\n        <button type=\"submit\">ADD PROJECT</button>\n      </form>\n    </template>\n    <template id=\"single-project\">\n      <li></li>\n    </template>\n    <template id=\"project-list\">\n      <section class=\"projects\">\n        <header>\n          <h2></h2>\n        </header>\n        <ul></ul>\n      </section>\n    </template>\n    <div id=\"app\"></div>\n  </body>\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- index.html	(revision c7cb30db5048f57fc73c12eec1bd31a4b6b801d1)
++++ index.html	(date 1591736729071)
+@@ -1,46 +1,46 @@
+ <!DOCTYPE html>
+ <html lang="en">
+-  <head>
+-    <meta charset="UTF-8" />
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
++<head>
++    <meta charset="UTF-8"/>
++    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
++    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+     <title>ProjectManager</title>
+-    <link rel="stylesheet" href="app.css" />
++    <link rel="stylesheet" href="app.css"/>
+     <script src="dist/app.js" defer></script>
+-  </head>
+-  <body>
+-    <template id="project-input">
+-      <form>
++</head>
++<body>
++<template id="project-input">
++    <form>
+         <div class="form-control">
+-          <label for="title">Title</label>
+-          <input type="text" id="title" />
++            <label for="title">Title</label>
++            <input type="text" id="title"/>
+         </div>
+         <div class="form-control">
+-          <label for="description">Description</label>
+-          <textarea id="description" rows="3"></textarea>
++            <label for="description">Description</label>
++            <textarea id="description" rows="3"></textarea>
+         </div>
+         <div class="form-control">
+-          <label for="people">People</label>
+-          <input type="number" id="people" step="1" min="0" max="10" />
++            <label for="people">People</label>
++            <input type="number" id="people" step="1" min="0" max="10"/>
+         </div>
+-        <div class="form-control">
+-          <label for="habib">Habib</label>
+-          <input type="number" id="habib" step="1" min="0" max="10" />
+-        </div>
+         <button type="submit">ADD PROJECT</button>
+-      </form>
+-    </template>
+-    <template id="single-project">
+-      <li></li>
+-    </template>
+-    <template id="project-list">
+-      <section class="projects">
++    </form>
++</template>
++<template id="single-project">
++    <li draggable="true">
++        <h2></h2>
++        <h3></h3>
++        <p></p>
++    </li>
++</template>
++<template id="project-list">
++    <section class="projects">
+         <header>
+-          <h2></h2>
++            <h2></h2>
+         </header>
+         <ul></ul>
+-      </section>
+-    </template>
+-    <div id="app"></div>
+-  </body>
++    </section>
++</template>
++<div id="app"></div>
++</body>
+ </html>
